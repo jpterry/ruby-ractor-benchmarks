@@ -36,3 +36,4 @@ Benchmark.bm do |x|
   x.report('threaded') { threaded_tarai(CONCURRENCY) }
   x.report('ractors') { ractor_tarai(CONCURRENCY) }
 end
+end_benchmark

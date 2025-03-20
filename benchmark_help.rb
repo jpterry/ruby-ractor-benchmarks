@@ -20,7 +20,15 @@ end
 
 def start_benchmark
   silence_reactor_warning
-  puts "Running #{benchmark_name(name: @name, file: @file)} @ #{bench_start_time = Time.now}...\n"
+  puts "Running #{benchmark_name(name: @name, file: @file)} @ #{@bench_start_time = Time.now}...\n"
+end
+
+def end_benchmark
+  bench_end_time = Time.now
+  elapsed_time = bench_end_time - @bench_start_time
+  puts "\nFinished #{benchmark_name(name: @name, file: @file)} @ #{bench_end_time}."
+  puts "Elapsed time: #{elapsed_time.round(2)} seconds."
+  puts "-------------------------\n\n"
 end
 
 def benchmark_name(name: nil, file: nil)

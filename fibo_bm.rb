@@ -40,3 +40,4 @@ Benchmark.bm(10) do |x|
   x.report('threaded') { threaded_fib(CONCURRENCY, FIB_NUM) }
   x.report('ractors') { ractor_fib(CONCURRENCY, FIB_NUM) }
 end
+end_benchmark
