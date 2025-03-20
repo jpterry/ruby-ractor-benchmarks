@@ -5,7 +5,7 @@ setup_benchmark(
   file: __FILE__,
 )
 
-CONCURRENCY = 6
+CONCURRENCY = 4
 FIB_NUM = 38
 
 # This is a naive recursive Fibonacci implementation.

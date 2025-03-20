@@ -5,7 +5,7 @@ setup_benchmark(
   file: __FILE__,
 )
 
-CONCURRENCY = 6
+CONCURRENCY = 4
 STARTING_PARAMS = [14, 7, 0].freeze
 
 def tarai(x, y, z) =
@@ -34,7 +34,7 @@ end
 start_benchmark
 Benchmark.bm(15, ">times faster:") do |x|
   # Uncomment below to see that threaded matches serial almost exactly
-  # s = x.report('serial') { serial_tarai(CONCURRENCY) }
+  s = x.report('serial') { serial_tarai(CONCURRENCY) } unless ENV['SKIP_SERIAL']
   t = x.report('threaded') { threaded_tarai(CONCURRENCY) }
   r = x.report('ractors') { ractor_tarai(CONCURRENCY) }
   [t/r]

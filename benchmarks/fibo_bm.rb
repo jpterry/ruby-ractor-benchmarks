@@ -37,7 +37,7 @@ end
 start_benchmark
 Benchmark.bm(15, ">times faster:") do |x|
   # Uncomment below to see that threaded matches serial almost exactly
-  # s = x.report('serial')   { serial_fibonacci(CONCURRENCY, FIB_NUM) }
+  s = x.report('serial')   { serial_fibonacci(CONCURRENCY, FIB_NUM) } unless ENV['SKIP_SERIAL']
   t = x.report('threaded') { threaded_fibonacci(CONCURRENCY, FIB_NUM) }
   r = x.report('ractors')  { ractor_fibonacci(CONCURRENCY, FIB_NUM) }
   [t/r]
