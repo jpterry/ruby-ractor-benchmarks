@@ -5,7 +5,7 @@ setup_benchmark(
   file: __FILE__,
 )
 
-PARALLELISM = 4
+CONCURRENCY = 4
 STARTING_PARAMS = [14, 7, 0].freeze
 
 def tarai(x, y, z) =
@@ -32,7 +32,7 @@ end
 
 start_benchmark
 Benchmark.bm do |x|
-  x.report('sequential') { seq_tarai(PARALLELISM) }
-  x.report('threaded') { threaded_tarai(PARALLELISM) }
-  x.report('ractors') { ractor_tarai(PARALLELISM) }
+  x.report('sequential') { seq_tarai(CONCURRENCY) }
+  x.report('threaded') { threaded_tarai(CONCURRENCY) }
+  x.report('ractors') { ractor_tarai(CONCURRENCY) }
 end

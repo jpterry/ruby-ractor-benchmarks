@@ -58,4 +58,22 @@ module Hwinfo
     return @is_linux if defined?(@is_linux)
     @is_linux = RbConfig::CONFIG['host_os'] =~ /linux/
   end
+
+  def hardware_info
+    {
+      cpu_physical_cores: cpu_pysical_cores,
+      cpu_logical_cores: cpu_logical_cores,
+      cpu_model: cpu_model,
+      machine: uname[:machine],
+      os_name: uname[:sysname],
+      os_release:  uname[:release],
+      os_version:  uname[:version],
+      mem_total_mb: mem_total_mb,
+    }.compact
+  end
+
+  def print_info
+    puts "Hardware Info:"
+    pp hardware_info
+  end
 end

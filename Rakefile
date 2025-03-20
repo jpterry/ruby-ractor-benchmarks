@@ -1,19 +1,26 @@
 task default: ['benchmark:all']
 
 namespace :benchmark do
-  task :tarai do
+  task :start do
+    puts "Running benchmark tasks..."
+    require_relative "hwinfo"
+    Hwinfo.print_info
+    puts ""
+  end
+
+  task tarai: [:start] do
     ruby "tarai_bm.rb"
   end
 
-  task :tarai_yjit do
+  task tarai_yjit: [:start] do
     ruby "--yjit", "tarai_bm.rb"
   end
 
-  task :fibo do
+  task fibo: [:start] do
     ruby "fibo_bm.rb"
   end
 
-  task :fibo_yjit do
+  task fibo_yjit: [:start] do
     ruby "--yjit", "fibo_bm.rb"
   end
 

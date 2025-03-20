@@ -35,7 +35,7 @@ def ractor_fib(concurrency, n)
 end
 
 start_benchmark
-Benchmark.bm do |x|
+Benchmark.bm(10) do |x|
   x.report('sequential') { synchronous_fib(CONCURRENCY, FIB_NUM) }
   x.report('threaded') { threaded_fib(CONCURRENCY, FIB_NUM) }
   x.report('ractors') { ractor_fib(CONCURRENCY, FIB_NUM) }
