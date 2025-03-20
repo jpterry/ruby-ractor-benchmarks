@@ -1,6 +1,6 @@
 require_relative "benchmark_help"
 
-init_benchmark_script(
+setup_benchmark(
   name: "Tarai",
   file: __FILE__,
 )
@@ -30,6 +30,7 @@ def ractor_tarai(n)
   end.map(&:take)
 end
 
+start_benchmark
 Benchmark.bm do |x|
   x.report('sequential') { seq_tarai(PARALLELISM) }
   x.report('threaded') { threaded_tarai(PARALLELISM) }

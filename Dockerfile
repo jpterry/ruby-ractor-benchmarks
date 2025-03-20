@@ -6,3 +6,5 @@ FROM ruby:${RUBY_VERSION}
 # Straight Ruby. No Dependencies.
 WORKDIR /opt/ruby_benchmarks
 COPY . .
+
+CMD ["rake"]

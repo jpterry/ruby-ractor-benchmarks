@@ -7,9 +7,13 @@ def silence_reactor_warning
   Warning[:experimental] = false
 end
 
-def init_benchmark_script(...)
-  silence_reactor_warning
+def setup_benchmark(...)
   print_header(...)
+end
+
+def start_benchmark
+  silence_reactor_warning
+  puts "Starting Benchmark @ #{bench_start_time = Time.now}"
 end
 
 def print_header(name: nil, file: nil)
@@ -26,17 +30,16 @@ def print_header(name: nil, file: nil)
   puts "Hardware Info:"
   pp collect_info
 
-  puts "Starting Benchmark @ #{bench_start_time = Time.now}"
 end
 
 def ruby_info
   {
     RUBY_DESCRIPTION: RUBY_DESCRIPTION,
-    RUBYOPT: ENV['RUBYOPT'] || "",
+    RUBYOPT: ENV['RUBYOPT'],
+    CONFIG_MAINLIBS: RbConfig::CONFIG['MAINLIBS'],
+    CONFIG_LIBS: RbConfig::CONFIG['LIBS'],
     YJIT_enabled: defined?(RubyVM::YJIT) && RubyVM::YJIT.respond_to?(:enabled?) && RubyVM::YJIT.enabled?,
     MJIT_enabled: defined?(RubyVM::MJIT) && RubyVM::MJIT.respond_to?(:enabled?) && RubyVM::MJIT.enabled?,
-    CONFIG_MAINLIBS: RbConfig::CONFIG['MAINLIBS'] || "",
-    CONFIG_LIBS: RbConfig::CONFIG['LIBS'] || "",
   }.compact
 end
 

@@ -1,11 +1,12 @@
 require_relative "benchmark_help"
 
-init_benchmark_script(
+setup_benchmark(
   name: "Fibonacci",
   file: __FILE__,
 )
 
-PARALLELISM = 4
+CONCURRENCY = 4
+FIB_NUM = 38
 
 def fibonacci(n)
   if n == 0 || n == 1
@@ -33,8 +34,9 @@ def ractor_fib(concurrency, n)
   end.map(&:take)
 end
 
+start_benchmark
 Benchmark.bm do |x|
-  x.report('sequential') { synchronous_fib(PARALLELISM, 38) }
-  x.report('threaded') { threaded_fib(PARALLELISM, 38) }
-  x.report('ractors') { ractor_fib(PARALLELISM, 38) }
+  x.report('sequential') { synchronous_fib(CONCURRENCY, FIB_NUM) }
+  x.report('threaded') { threaded_fib(CONCURRENCY, FIB_NUM) }
+  x.report('ractors') { ractor_fib(CONCURRENCY, FIB_NUM) }
 end
