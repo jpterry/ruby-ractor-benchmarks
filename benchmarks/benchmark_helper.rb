@@ -1,5 +1,4 @@
 require "benchmark"
-require "etc"
 
 require_relative "../lib/hwinfo"
 require_relative "../lib/ruby_info"
