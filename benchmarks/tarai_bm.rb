@@ -1,11 +1,11 @@
-require_relative "benchmark_help"
+require_relative "benchmark_helper"
 
 setup_benchmark(
   name: "Tarai",
   file: __FILE__,
 )
 
-CONCURRENCY = 4
+CONCURRENCY = 6
 STARTING_PARAMS = [14, 7, 0].freeze
 
 def tarai(x, y, z) =
@@ -13,8 +13,9 @@ def tarai(x, y, z) =
                      tarai(y-1, z, x),
                      tarai(z-1, x, y))
 
-
-def seq_tarai(n)
+# Calls tarai n times serially.
+# Used as a baseline for comparison.
+def serial_tarai(n)
   n.times.map { tarai(*STARTING_PARAMS) }
 end
 
@@ -31,9 +32,11 @@ def ractor_tarai(n)
 end
 
 start_benchmark
-Benchmark.bm do |x|
-  x.report('sequential') { seq_tarai(CONCURRENCY) }
-  x.report('threaded') { threaded_tarai(CONCURRENCY) }
-  x.report('ractors') { ractor_tarai(CONCURRENCY) }
+Benchmark.bm(15, ">times faster:") do |x|
+  # Uncomment below to see that threaded matches serial almost exactly
+  # s = x.report('serial') { serial_tarai(CONCURRENCY) }
+  t = x.report('threaded') { threaded_tarai(CONCURRENCY) }
+  r = x.report('ractors') { ractor_tarai(CONCURRENCY) }
+  [t/r]
 end
 end_benchmark

@@ -7,6 +7,7 @@ module RubyInfo
       MJIT_enabled: defined?(RubyVM::MJIT) && RubyVM::MJIT.respond_to?(:enabled?) && RubyVM::MJIT.enabled?,
     }.compact
   end
+
   def ruby_info
     {
       **ruby_info_simple,

@@ -1,8 +1,8 @@
 require "benchmark"
 require "etc"
 
-require_relative "hwinfo"
-require_relative "ruby_info"
+require_relative "../lib/hwinfo"
+require_relative "../lib/ruby_info"
 
 def silence_reactor_warning
   Warning[:experimental] = false
