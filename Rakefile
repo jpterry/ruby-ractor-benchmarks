@@ -23,7 +23,7 @@ namespace :benchmark do
 
   desc "Run Fibonacci benchmark serially, comparing without & with YJIT"
   task fibo_serial_yjit: [:start] do
-    ruby_run_bm "fibo_ractor_yjit.rb"
+    ruby_run_bm "fibo_serial_yjit.rb"
   end
 
   desc "Run Fibonacci benchmark in ractors, comparing without & with YJIT"
